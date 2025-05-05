@@ -3,7 +3,7 @@ import axios from 'axios';
 console.log('Inicializando authService.js'); // Depuración
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api/usuarios',
+  baseURL: 'http://localhost:8080/api/auth',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,7 +29,7 @@ export const loginUser = async (credentials) => {
 export const registerUser = async (userData) => {
   console.log('Ejecutando registerUser con datos:', userData);
   try {
-    const response = await api.post('/register', userData);
+    const response = await api.post('/registrar', userData);
     console.log('Respuesta exitosa del servidor:', response.data);
     return response;
   } catch (error) {

@@ -10,7 +10,7 @@ const Login = () => {
   const { login } = useAuth();
 
   const [credentials, setCredentials] = useState({
-    nombre: '',
+    usuario: '',
     contrasena: ''
   });
 
@@ -31,7 +31,7 @@ const Login = () => {
     setLoading(true);
   
     // Validación simple
-    if (credentials.nombre.trim().length < 2) {
+    if (credentials.usuario.trim().length < 2) {
       setError('El nombre debe tener al menos 2 caracteres');
       setLoading(false);
       return;
@@ -73,14 +73,14 @@ const Login = () => {
         )}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <label htmlFor="nombre">Nombre</label>
+            <label htmlFor="usuario">Usuario</label>
             <input
               type="text"
-              id="nombre"
-              name="nombre"
-              value={credentials.nombre}
+              id="usuario"
+              name="usuario"
+              value={credentials.usuario}
               onChange={handleChange}
-              placeholder="Ingresa tu nombre"
+              placeholder="Ingresa tu Usuario"
               required
               disabled={loading}
             />
