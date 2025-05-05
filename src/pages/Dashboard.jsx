@@ -74,6 +74,17 @@ const ManageUsers = () => {
     setEditUser(user);  // Poner el usuario en el formulario de edición
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:8080/api/usuarios/${editUser.id}`, editUser);
+      setUsers(users.map(u => (u.id === editUser.id ? editUser : u)));
+      setEditUser(null); // Limpia el formulario después de actualizar
+    } catch (err) {
+      console.error("Error al actualizar usuario", err);
+    }
+  };
+
   const handleToggleActive = async (id, isActive) => {
     try {
       const url = `http://localhost:8080/api/usuarios/${id}/${isActive ? 'desactivar' : 'activar'}`;
@@ -114,12 +125,11 @@ const ManageUsers = () => {
               <td>{u.rol?.nombre || 'Sin rol'}</td>
               <td>{u.activo ? "Activo" : "Inactivo"}</td>
               <td>
-  <button onClick={() => handleEdit(u)}>✏️ Editar</button>
-  <button onClick={() => handleToggleActive(u.id, u.activo)}>
-    {u.activo ? '⛔ Desactivar' : '✅ Activar'}
-  </button>
-</td>
-
+                  <button onClick={() => handleEdit(u)}>✏️ Editar</button>
+                  <button onClick={() => handleToggleActive(u.id, u.activo)}>
+                  {u.activo ? '⛔ Desactivar' : '✅ Activar'}
+                  </button>
+              </td>
             </tr>
           ))}
         </tbody>
